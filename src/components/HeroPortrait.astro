@@ -1,0 +1,232 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../../public/images/wendra-professional-v2-fullhd.png';
+import Icon from './Icon.astro';
+---
+
+<figure class="hero-portrait">
+  <span class="portrait-label" aria-hidden="true"
+    >THE PERSON BEHIND THE CODE</span
+  >
+  <div class="portrait-orbits" aria-hidden="true">
+    <div class="portrait-ring"></div>
+    <div class="portrait-ring portrait-ring-outer"></div>
+    <div class="orbit-traveller"><span></span></div>
+  </div>
+  <div class="portrait-frame">
+    <Image
+      src={portrait}
+      alt="Muhammad Wendra Suryananda wearing glasses, a plain gray shirt, and black headphones around his neck."
+      widths={[360, 540, 780, 1080]}
+      sizes="(max-width: 700px) 80vw, (max-width: 1100px) 36vw, 450px"
+      format="webp"
+      quality={90}
+      loading="eager"
+      fetchpriority="high"
+      class="portrait-photo"
+    />
+  </div>
+  <div class="portrait-badge badge-code" aria-hidden="true">
+    <Icon name="code" size={24} />
+  </div>
+  <div class="portrait-badge badge-network" aria-hidden="true">
+    <Icon name="network" size={22} />
+  </div>
+  <span class="portrait-cross" aria-hidden="true">+</span>
+  <figcaption>
+    <span class="status-dot"></span> Education · Infrastructure · Development
+  </figcaption>
+</figure>
+
+<style>
+  .hero-portrait {
+    position: relative;
+    width: 100%;
+    max-width: 570px;
+    aspect-ratio: 0.94;
+    margin: -24px auto 0;
+    isolation: isolate;
+  }
+  .portrait-label {
+    position: absolute;
+    top: 0;
+    left: 11%;
+    font: 8px var(--font-mono);
+    letter-spacing: 1.6px;
+    color: #9aafa2;
+  }
+  .portrait-frame {
+    position: absolute;
+    inset: 32px 10% 48px;
+    overflow: hidden;
+    border: 1px solid #60816b66;
+    border-radius: 120px 8px 100px 8px;
+    background: #161c19;
+    box-shadow: 0 24px 70px #0003;
+  }
+  .portrait-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 70%, #10131266);
+  }
+  .portrait-frame :global(.portrait-photo) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 32%;
+  }
+  .portrait-orbits {
+    position: absolute;
+    inset: 8% 0 7%;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .portrait-ring {
+    position: absolute;
+    inset: 8% 0;
+    border: 1px solid #8eccaa26;
+    border-radius: 50%;
+    transform: rotate(-28deg);
+  }
+  .portrait-ring-outer {
+    inset: 0 4%;
+    border-style: dashed;
+    opacity: 0.65;
+    transform: rotate(20deg);
+  }
+  .portrait-orbits :global(.orbit-traveller) {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .portrait-badge {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border: 1px solid #577c6266;
+    border-radius: 12px;
+    color: #b4e4c9;
+    background: #19211eea;
+    box-shadow: 0 8px 24px #0003;
+    backdrop-filter: blur(12px);
+  }
+  .badge-code {
+    right: 5%;
+    top: 16%;
+  }
+  .badge-network {
+    left: 5%;
+    bottom: 22%;
+  }
+  .portrait-cross {
+    position: absolute;
+    right: 6%;
+    bottom: 16%;
+    font: 20px var(--font-mono);
+    color: #8fac98;
+  }
+  figcaption {
+    position: absolute;
+    bottom: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #a3b5a7;
+    font: 8px var(--font-mono);
+    letter-spacing: 0.25px;
+  }
+  figcaption :global(.status-dot) {
+    width: 4px;
+    height: 4px;
+  }
+  @media (max-width: 900px) and (min-width: 701px) {
+    .hero-portrait {
+      aspect-ratio: 0.72;
+    }
+    .portrait-frame {
+      inset-inline: 7%;
+      border-radius: 80px 6px 70px 6px;
+    }
+    .portrait-label {
+      font-size: 7px;
+      left: 7%;
+      letter-spacing: 0.8px;
+    }
+    .portrait-badge {
+      width: 42px;
+      height: 42px;
+    }
+    .badge-code {
+      right: 1%;
+    }
+    .badge-network {
+      left: 1%;
+    }
+    figcaption {
+      font-size: 6px;
+      gap: 5px;
+    }
+  }
+  @media (max-width: 700px) {
+    .hero-portrait {
+      max-width: 430px;
+      aspect-ratio: 0.9;
+      margin-top: 45px;
+    }
+    .portrait-frame {
+      inset: 27px 7% 42px;
+      border-radius: 85px 6px 75px 6px;
+    }
+    .portrait-label {
+      left: 8%;
+      font-size: 7px;
+      letter-spacing: 1.2px;
+    }
+    .portrait-badge {
+      width: 43px;
+      height: 43px;
+      border-radius: 10px;
+    }
+    .badge-code {
+      right: 1%;
+    }
+    .badge-network {
+      left: 1%;
+    }
+    .portrait-cross {
+      right: 2%;
+    }
+    figcaption {
+      font-size: 7px;
+      gap: 6px;
+      letter-spacing: 0;
+      bottom: 9px;
+    }
+  }
+  @media print {
+    .hero-portrait {
+      width: 180px;
+      margin: 20px 0;
+      break-inside: avoid;
+    }
+    .portrait-orbits,
+    .portrait-badge,
+    .portrait-cross,
+    .portrait-label,
+    figcaption {
+      display: none;
+    }
+    .portrait-frame {
+      inset: 0;
+      border-radius: 4px;
+      box-shadow: none;
+    }
+  }
+</style>

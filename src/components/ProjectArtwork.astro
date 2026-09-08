@@ -1,0 +1,79 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  index: number;
+}
+const { index } = Astro.props;
+---
+
+<div class="project-drawing" aria-hidden="true">
+  {
+    index === 0 && (
+      <div class="browser-drawing">
+        <div class="browser-bar">
+          <>
+            <i />
+            <i />
+            <i />
+            <span>workspace</span>
+          </>
+        </div>
+        <div class="browser-body">
+          <div class="browser-sidebar">
+            <>
+              <b />
+              <b />
+              <b />
+              <b />
+            </>
+          </div>
+          <div class="browser-content">
+            <span />
+            <div>
+              <>
+                <i />
+                <i />
+                <i />
+              </>
+            </div>
+            <>
+              <b />
+              <b />
+              <b />
+            </>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  {
+    index === 1 && (
+      <div class="network-drawing">
+        <div class="network-line line-a" />
+        <div class="network-line line-b" />
+        <div class="network-center">
+          <Icon name="storage" size={35} />
+        </div>
+        <div class="network-satellite satellite-a" />
+        <div class="network-satellite satellite-b" />
+        <div class="network-satellite satellite-c" />
+      </div>
+    )
+  }
+  {
+    index >= 2 && (
+      <div class="ml-drawing">
+        {Array.from({ length: 3 }, (_, column) => (
+          <div>
+            {Array.from({ length: column === 1 ? 4 : 3 }, () => (
+              <i />
+            ))}
+          </div>
+        ))}
+        <svg viewBox="0 0 240 140">
+          <path d="M20 25 120 15 220 25M20 25 120 50 220 70M20 25 120 90 220 115M20 70 120 15 220 70M20 70 120 50 220 25M20 70 120 90 220 70M20 70 120 125 220 115M20 115 120 50 220 115M20 115 120 90 220 25M20 115 120 125 220 70" />
+        </svg>
+      </div>
+    )
+  }
+</div>

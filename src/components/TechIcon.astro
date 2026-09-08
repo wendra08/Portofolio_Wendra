@@ -1,0 +1,50 @@
+---
+import logos from '@iconify-json/logos/icons.json';
+import simpleIcons from '@iconify-json/simple-icons/icons.json';
+import Icon from './Icon.astro';
+interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+const icons = logos.icons as Record<
+  string,
+  { body: string; width?: number; height?: number }
+>;
+const logo = icons[name];
+const simpleLogo = (
+  simpleIcons.icons as Record<
+    string,
+    { body: string; width?: number; height?: number }
+  >
+)[name];
+---
+
+{
+  name === 'storage' ? (
+    <Icon name="storage" size={30} />
+  ) : logo ? (
+    <svg
+      class:list={[
+        'tech-logo',
+        {
+          'light-logo': ['github-icon', 'nextjs-icon', 'mikrotik'].includes(
+            name,
+          ),
+        },
+      ]}
+      viewBox={`0 0 ${logo.width ?? logos.width ?? 128} ${logo.height ?? logos.height ?? 128}`}
+      aria-hidden="true"
+      set:html={logo.body}
+    />
+  ) : simpleLogo ? (
+    <svg
+      class={`tech-logo brand-${name}`}
+      viewBox={`0 0 ${simpleLogo.width ?? simpleIcons.width ?? 24} ${simpleLogo.height ?? simpleIcons.height ?? 24}`}
+      fill="currentColor"
+      aria-hidden="true"
+      set:html={simpleLogo.body}
+    />
+  ) : (
+    <Icon name="code" size={30} />
+  )
+}

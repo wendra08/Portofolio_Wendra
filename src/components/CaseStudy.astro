@@ -1,0 +1,832 @@
+---
+import { Image } from 'astro:assets';
+import '@fontsource-variable/manrope';
+import '@fontsource/ibm-plex-mono/400.css';
+import '../styles/global.css';
+import Icon from './Icon.astro';
+import type { CaseStudy } from '../data/case-study';
+interface Props {
+  project: CaseStudy;
+}
+const { project } = Astro.props;
+const WorkflowList = project.workflowOrdered === false ? 'ul' : 'ol';
+import { profile } from '../data/portfolio';
+const sections = ['Problem', 'Solution', 'Results', 'Tech stack'];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101312" />
+    <meta name="description" content={project.summary} />
+    <meta
+      property="og:title"
+      content={`${project.title} — ${profile.shortName}`}
+    />
+    <meta property="og:description" content={project.summary} />
+    <meta property="og:type" content="article" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{project.title} — {profile.name}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#case-study">Skip to case study</a>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="/" class="brand" aria-label="Wendra — home"
+          >w<span>.</span><span class="brand-label">WENDRA</span></a
+        >
+        <div class="case-header-actions">
+          <button class="motion-toggle" aria-label="Pause animations" aria-pressed="false"><Icon name="pause" size={14}/><span>Pause motion</span></button>
+        <a class="return-link" href="/#work"
+          >Back to portfolio <Icon name="arrow" size={17} /></a
+        >
+        </div>
+      </div>
+    </header>
+    <main id="case-study" class="container">
+      <article>
+        <header class="case-hero">
+          <p class="eyebrow">
+            <span class="status-dot"></span> PROJECT {project.number} / {
+              project.category
+            }
+          </p>
+          <h1>{project.title}<span class="title-dot">.</span></h1>
+          <p class="case-summary">{project.summary}</p>
+          <dl class="case-facts">
+            <div><dt>Organization</dt><dd>{project.organization}</dd></div>
+            <div><dt>My role</dt><dd>{project.role}</dd></div>
+            <div><dt>Focus</dt><dd>{project.focus}</dd></div>
+          </dl>
+        </header>
+
+        <figure class="case-screenshot first-screenshot">
+          <a
+            href={project.screenshots[0].original}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open ${project.screenshots[0].title} screenshot in a new tab`}
+          >
+            <Image
+              src={project.screenshots[0].image}
+              alt={project.screenshots[0].alt}
+              widths={[480, 800, 1280]}
+              sizes="(max-width: 700px) calc(100vw - 44px), (max-width: 1352px) 90vw, 1240px"
+              format="webp"
+              quality={95}
+              loading="eager"
+              fetchpriority="high"
+            />
+          </a>
+          <figcaption>
+            <span>01 / {project.screenshots[0].title}</span><a
+              href={project.screenshots[0].original}
+              target="_blank"
+              rel="noopener noreferrer"
+              >Open original <Icon name="arrow" size={14} /><span
+                class="sr-only">(opens in a new tab)</span
+              ></a
+            >
+          </figcaption>
+        </figure>
+
+        <nav class="case-nav" aria-label="Case study sections">
+          {
+            sections.map((section, i) => (
+              <a href={`#${section.toLowerCase().replace(' ', '-')}`}>
+                <span>0{i + 1}</span>
+                {section}
+              </a>
+            ))
+          }
+        </nav>
+
+        <section class="case-section overview" aria-labelledby="overview-title">
+          <p class="eyebrow">OVERVIEW</p>
+          <div>
+            <h2 id="overview-title">
+              {project.headings.overview[0]}<br /><em
+                >{project.headings.overview[1]}</em
+              >
+            </h2><p>{project.overview}</p>
+          </div>
+        </section>
+
+        <section id="problem" class="case-section">
+          <div class="section-kicker">
+            <span>01 / PROBLEM</span><span>THE DESIGN CHALLENGE</span>
+          </div>
+          <div class="case-section-lead">
+            <h2>
+              {project.headings.problem[0]}<br /><em
+                >{project.headings.problem[1]}</em>
+            </h2><p>
+              {project.problem}
+            </p>
+          </div>
+          <div class="challenge-grid">
+            {
+              project.challenges.map((challenge, i) => (
+                <article>
+                  <>
+                    <span class="eyebrow">0{i + 1}</span>
+                    <h3>{challenge.title}</h3>
+                    <p>{challenge.description}</p>
+                  </>
+                </article>
+              ))
+            }
+          </div>
+        </section>
+
+        <section id="solution" class="case-section">
+          <div class="section-kicker">
+            <span>02 / SOLUTION</span><span>CONNECTED BY DESIGN</span>
+          </div>
+          <div class="case-section-lead">
+            <h2>
+              {project.headings.solution[0]}<br /><em
+                >{project.headings.solution[1]}</em>
+            </h2><p>
+              {project.solution}
+            </p>
+          </div>
+          <div class="workflow-panel">
+            <h3>{project.workflowTitle}</h3>
+            <p>{project.workflowDescription}</p>
+            <WorkflowList class="workflow">
+              {
+                project.workflow.map((step, i) => (
+                  <li>
+                    {project.workflowOrdered !== false && (
+                      <span>{String(i + 1).padStart(2, '0')}</span>
+                    )}
+                    {step}
+                  </li>
+                ))
+              }
+            </WorkflowList>
+          </div>
+          <div class="feature-grid">
+            {
+              project.features.map((feature) => (
+                <article>
+                  <>
+                    <Icon name={feature.icon} size={24} />
+                    <h3>{feature.title}</h3>
+                    <p>{feature.description}</p>
+                  </>
+                </article>
+              ))
+            }
+          </div>
+          {
+            project.documentWorkflows && (
+              <section
+                class="document-workflows"
+                aria-labelledby="document-workflows-title"
+              >
+                <p class="eyebrow">MY DEVELOPMENT CONTRIBUTION</p>
+                <h3 id="document-workflows-title">
+                  Automated HR document workflows
+                </h3>
+                <div class="document-grid">
+                  {project.documentWorkflows.map((document) => (
+                    <article>
+                      <h4>{document.title}</h4>
+                      <p>{document.description}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )
+          }
+          <figure class="case-screenshot tracking-screenshot">
+            <a
+              href={project.screenshots[1].original}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${project.screenshots[1].title} screenshot in a new tab`}
+            >
+              <Image
+                src={project.screenshots[1].image}
+                alt={project.screenshots[1].alt}
+                widths={[480, 800, 1280]}
+                sizes="(max-width: 700px) calc(100vw - 44px), (max-width: 1352px) 90vw, 1240px"
+                format="webp"
+                quality={95}
+                loading="lazy"
+              />
+            </a>
+            <figcaption>
+              <span>02 / {project.screenshots[1].title}</span><a
+                href={project.screenshots[1].original}
+                target="_blank"
+                rel="noopener noreferrer"
+                >Open original <Icon name="arrow" size={14} /><span
+                  class="sr-only">(opens in a new tab)</span
+                ></a
+              >
+            </figcaption>
+          </figure>
+          <p class="screenshot-description">{project.screenshots[1].caption}</p>
+        </section>
+
+        <section id="results" class="case-section">
+          <div class="section-kicker">
+            <span>03 / RESULTS</span><span>WHAT THE SYSTEM ENABLES</span>
+          </div>
+          <div class="case-section-lead">
+            <h2>
+              {project.headings.results[0]}<br /><em
+                >{project.headings.results[1]}</em>
+            </h2><p>
+              {project.resultsIntro}
+            </p>
+          </div>
+          <div class="results-grid">
+            {
+              project.results.map((result, i) => (
+                <article>
+                  <>
+                    <span class="result-number">0{i + 1}</span>
+                    <div>
+                      <>
+                        <h3>{result.title}</h3>
+                        <p>{result.description}</p>
+                      </>
+                    </div>
+                  </>
+                </article>
+              ))
+            }
+          </div>
+          <aside class="impact-note">
+            <p class="eyebrow">{project.impactLabel ?? 'Intended impact'}</p><p>
+              {project.intendedImpact}
+            </p>
+          </aside>
+        </section>
+
+        <section id="tech-stack" class="case-section">
+          <div class="section-kicker">
+            <span>04 / TECH STACK</span><span>THE TOOLS BEHIND THE SYSTEM</span>
+          </div>
+          <div class="stack-layout">
+            <div>
+              <h2>
+                {project.headings.stack[0]}<br /><em
+                  >{project.headings.stack[1]}</em>
+              </h2><p>
+                {project.stackIntro}
+              </p>
+            </div>
+            <table class="stack-table">
+              <caption class="sr-only"
+                >Technologies used and their roles in {project.title}</caption
+              ><thead
+                ><tr
+                  ><th scope="col">Technology</th><th scope="col"
+                    >Role in the system</th
+                  ></tr
+                ></thead
+              ><tbody
+                >{
+                  project.stack.map((technology) => (
+                    <tr>
+                      <>
+                        <th scope="row">{technology.name}</th>
+                        <td>{technology.purpose}</td>
+                      </>
+                    </tr>
+                  ))
+                }</tbody
+              >
+            </table>
+          </div>
+          {
+            project.deployment && (
+              <aside class="impact-note deployment-note">
+                <>
+                  <p class="eyebrow">INTERNAL DEPLOYMENT</p>
+                  <p>{project.deployment}</p>
+                </>
+              </aside>
+            )
+          }
+        </section>
+        <div class="case-bottom">
+          <div>
+            <p class="eyebrow">BEHIND THE WORK</p><p>
+              A project by {profile.name}.
+            </p>
+          </div><a href="/#work" class="button button-primary"
+            >Back to selected work <Icon name="arrow" size={18} /></a
+          >
+        </div>
+      </article>
+    </main>
+    <footer class="container footer">
+      <a href="/" class="brand" aria-label="Wendra — home">w<span>.</span></a><p
+      >
+        © {new Date().getFullYear()}
+        {profile.name}
+      </p><a href="/#contact" class="back-top"
+        >LET'S CONNECT <Icon name="arrow" size={15} /></a
+      >
+    </footer>
+    <script src="../scripts/site.ts"></script>
+  </body>
+</html>
+
+<style>
+  .case-header-actions { display: flex; align-items: center; gap: 26px; }
+  @media (max-width: 700px) {
+    .case-header-actions { gap: 15px; }
+    .case-header-actions :global(.motion-toggle span) { display: none; }
+    .case-header-actions :global(.motion-toggle) { min-height: 40px; min-width: 40px; justify-content: center; }
+  }
+  .case-hero > .eyebrow,
+  .impact-note .eyebrow {
+    text-transform: uppercase;
+  }
+  .document-workflows {
+    margin-top: 42px;
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+  }
+  .document-workflows > .eyebrow {
+    color: var(--accent);
+    font-size: 9px;
+    margin-bottom: 15px;
+  }
+  .document-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 32px;
+    margin-top: 25px;
+  }
+  .document-grid h4 {
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+  .document-grid p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #abb8ab;
+  }
+  @media (max-width: 700px) {
+    .document-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .return-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 12px;
+    color: #bfcdc2;
+  }
+  .return-link:hover {
+    color: var(--accent);
+  }
+  .case-hero {
+    padding-block: 72px 44px;
+  }
+  .case-hero > .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--accent);
+    font-size: 9px;
+  }
+  h1 {
+    font-size: clamp(34px, 4.4vw, 62px);
+    line-height: 1.15;
+    letter-spacing: -2.5px;
+    max-width: 960px;
+    margin-top: 27px;
+  }
+  h1 > .title-dot {
+    display: inline;
+    color: var(--accent);
+  }
+  .case-summary {
+    font-size: 17px;
+    line-height: 1.85;
+    color: #bbc7bd;
+    max-width: 760px;
+    margin-top: 25px;
+  }
+  .case-facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    margin: 38px 0 0;
+    padding-top: 25px;
+    border-top: 1px solid var(--line);
+  }
+  .case-facts dt {
+    font: 9px var(--font-mono);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #9faf9f;
+  }
+  .case-facts dd {
+    margin: 12px 0 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .case-screenshot {
+    margin: 0;
+  }
+  .case-screenshot > a {
+    display: block;
+    border: 1px solid #43554a;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .case-screenshot :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    margin-top: 16px;
+    font: 10px var(--font-mono);
+    color: #aebcaf;
+    line-height: 1.7;
+  }
+  figcaption a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--accent);
+    flex-shrink: 0;
+    padding-block: 6px;
+  }
+  .case-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 40px;
+    margin-top: 38px;
+    padding: 23px 0;
+    border-block: 1px solid var(--line);
+  }
+  .case-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #d1dcd1;
+    font-size: 12px;
+    padding-block: 7px;
+  }
+  .case-nav a:hover {
+    color: var(--accent);
+  }
+  .case-nav a > span {
+    font: 9px var(--font-mono);
+    color: var(--accent);
+  }
+  .case-section {
+    padding-block: 70px;
+    border-bottom: 1px solid var(--line);
+  }
+  .overview {
+    display: grid;
+    grid-template-columns: 0.6fr 1fr;
+    gap: 70px;
+  }
+  .overview > .eyebrow {
+    color: var(--accent);
+    padding-top: 10px;
+  }
+  .overview p:not(.eyebrow),
+  .case-section-lead > p,
+  .stack-layout > div > p {
+    font-size: 14px;
+    line-height: 1.95;
+    color: #aebbb0;
+  }
+  .overview h2 {
+    margin-bottom: 23px;
+  }
+  .case-section-lead {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: start;
+  }
+  .challenge-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    margin-top: 42px;
+  }
+  .challenge-grid article {
+    border-top: 1px solid #3b4d3b;
+    padding-top: 22px;
+  }
+  .challenge-grid .eyebrow {
+    color: var(--accent);
+  }
+  .challenge-grid h3 {
+    margin-top: 17px;
+  }
+  .challenge-grid p,
+  .feature-grid p,
+  .results-grid p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #abb8ab;
+    margin-top: 12px;
+  }
+  .workflow-panel {
+    margin-top: 40px;
+    padding: 28px;
+    border: 1px solid #354737;
+    background: #182019;
+  }
+  .workflow-panel > p {
+    font-size: 12px;
+    color: #b1c0b1;
+    margin-top: 10px;
+    line-height: 1.8;
+  }
+  .workflow {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+    margin: 30px 0 0;
+  }
+  .workflow li {
+    border-top: 1px solid #52745b;
+    padding-top: 17px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .workflow li span {
+    display: block;
+    font: 9px var(--font-mono);
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 38px 32px;
+    margin-top: 42px;
+  }
+  .feature-grid :global(svg) {
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  h3 {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .tracking-screenshot {
+    margin-top: 46px;
+  }
+  .screenshot-description {
+    font-size: 12px;
+    color: #aebcaf;
+    line-height: 1.9;
+    margin-top: 9px;
+  }
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 42px;
+  }
+  .results-grid article {
+    display: flex;
+    gap: 20px;
+    border-top: 1px solid #354735;
+    padding-top: 25px;
+  }
+  .result-number {
+    font: 12px var(--font-mono);
+    color: var(--accent);
+    padding-top: 6px;
+  }
+  .impact-note {
+    margin-top: 36px;
+    border-left: 2px solid #8fbda0;
+    background: #172018;
+    padding: 24px 28px;
+  }
+  .impact-note .eyebrow {
+    color: var(--accent);
+    font-size: 9px;
+  }
+  .impact-note p + p {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: #bfcebd;
+  }
+  .stack-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 70px;
+  }
+  .stack-layout > div > p {
+    margin-top: 22px;
+  }
+  .stack-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  .stack-table th,
+  .stack-table td {
+    padding: 17px 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+    line-height: 1.8;
+    vertical-align: top;
+  }
+  .stack-table th:first-child {
+    padding-left: 0;
+  }
+  .stack-table thead th {
+    color: #a8bba8;
+    font: 9px var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding-top: 0;
+  }
+  .stack-table tbody th {
+    font-weight: 500;
+  }
+  .stack-table td {
+    color: #b0bcb1;
+  }
+  .case-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding-block: 48px;
+  }
+  .case-bottom .eyebrow {
+    color: var(--accent);
+    font-size: 9px;
+  }
+  .case-bottom p + p {
+    font-size: 13px;
+    color: #b4c1b5;
+    margin-top: 12px;
+    line-height: 1.8;
+  }
+  @media (max-width: 900px) {
+    .overview {
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+    .case-section-lead {
+      gap: 35px;
+    }
+    .feature-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .stack-layout {
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
+    .stack-layout > div > p {
+      max-width: 550px;
+    }
+    .case-facts {
+      gap: 18px;
+    }
+  }
+  @media (max-width: 700px) {
+    .return-link {
+      font-size: 10px;
+      gap: 8px;
+    }
+    .case-hero {
+      padding-block: 42px 30px;
+    }
+    .case-hero > .eyebrow {
+      font-size: 7px;
+      letter-spacing: 0.7px;
+    }
+    h1 {
+      font-size: 36px;
+      letter-spacing: -1.4px;
+      margin-top: 22px;
+    }
+    .case-summary {
+      font-size: 14px;
+      margin-top: 22px;
+    }
+    .case-facts {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 26px;
+    }
+    .case-facts dd {
+      margin-top: 7px;
+      font-size: 12px;
+    }
+    figcaption {
+      font-size: 8px;
+      gap: 13px;
+      align-items: flex-start;
+    }
+    .case-nav {
+      gap: 10px 23px;
+      margin-top: 25px;
+      padding-block: 15px;
+    }
+    .case-nav a {
+      font-size: 11px;
+    }
+    .case-section {
+      padding-block: 45px;
+    }
+    .case-section-lead {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .overview p:not(.eyebrow),
+    .case-section-lead > p,
+    .stack-layout > div > p {
+      font-size: 13px;
+    }
+    .challenge-grid,
+    .feature-grid,
+    .results-grid {
+      grid-template-columns: 1fr;
+      gap: 25px;
+      margin-top: 28px;
+    }
+    .workflow-panel {
+      padding: 20px;
+      margin-top: 28px;
+    }
+    .workflow {
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .feature-grid article {
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+    .tracking-screenshot {
+      margin-top: 32px;
+    }
+    .impact-note {
+      padding: 20px;
+    }
+    .impact-note p + p {
+      font-size: 13px;
+    }
+    .stack-table th,
+    .stack-table td {
+      padding-inline: 8px;
+      font-size: 11px;
+    }
+    .stack-table thead th {
+      font-size: 8px;
+    }
+    .case-bottom {
+      align-items: flex-start;
+      flex-direction: column;
+      padding-block: 32px;
+    }
+  }
+  @media print {
+    .case-nav,
+    .case-bottom,
+    .return-link {
+      display: none;
+    }
+    .case-hero,
+    .case-section {
+      padding-block: 25px;
+    }
+    .workflow-panel,
+    .impact-note {
+      background: white;
+    }
+    .case-screenshot {
+      break-inside: avoid;
+    }
+  }
+</style>
