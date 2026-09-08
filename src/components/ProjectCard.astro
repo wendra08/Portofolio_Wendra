@@ -9,6 +9,8 @@ interface Props {
 }
 const { project, index } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
+const assetUrl = (path: string) =>
+  `${baseUrl.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 ---
 
 <article
@@ -20,7 +22,7 @@ const baseUrl = import.meta.env.BASE_URL;
       project.image ? (
         typeof project.image === 'string' ? (
           <img
-            src={`${baseUrl}${project.image.replace(/^\//, '')}`}
+            src={assetUrl(project.image)}
             alt={project.imageAlt ?? project.title}
             loading="lazy"
           />
@@ -57,7 +59,7 @@ const baseUrl = import.meta.env.BASE_URL;
       !project.placeholder && project.url && (
         <a
           class="text-link"
-          href={`${baseUrl}${project.url.replace(/^\//, '')}`}
+          href={assetUrl(project.url)}
         >
           {project.linkLabel ?? 'View project'} <Icon name="arrow" size={16} />
         </a>
