@@ -13,9 +13,9 @@ export const profile = {
   title: 'IT Developer & IT Specialist',
   description:
     'The professional portfolio of Muhammad Wendra Suryananda. A journey through technology education, IT infrastructure, and software development.',
-  email: '',
-  github: '',
-  linkedin: '',
+  email: 'wendrawork@gmail.com',
+  github: 'https://github.com/wendra08',
+  linkedin: 'https://www.linkedin.com/in/wendrasuryananda/',
   // Put your actual PDF in public/, then rebuild. The link activates when it exists.
   cvFile: 'Muhammad-Wendra-Suryananda-CV.pdf',
 };

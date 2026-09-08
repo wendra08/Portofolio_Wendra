@@ -45,6 +45,20 @@ try {
   assert.match(await page.locator('#education').innerText(), /3\.93 \/ 4\.00/);
   assert.match(await page.locator('#experience').innerText(), /2026 — Present/);
   assert.match(await page.locator('#experience').innerText(), /PT Graha Prima Energy/);
+  assert.equal(
+    await page.locator('a[href="mailto:wendrawork@gmail.com"]').count(),
+    1,
+  );
+  assert.equal(
+    await page.locator('a[href="https://github.com/wendra08"]').count(),
+    1,
+  );
+  assert.equal(
+    await page
+      .locator('a[href="https://www.linkedin.com/in/wendrasuryananda/"]')
+      .count(),
+    1,
+  );
   assert.equal(await page.locator('.project-card').count(), 4);
   assert.equal(await page.locator('.project-card .coming-soon').count(), 0);
   assert.equal(await page.locator('.skill-group li').count(), 13);
