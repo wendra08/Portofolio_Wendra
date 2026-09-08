@@ -62,6 +62,7 @@ export const skills = [
   { name: 'Odoo', icon: 'odoo', group: 'Web & business apps' },
   { name: 'Laravel', icon: 'laravel', group: 'Web & business apps' },
   { name: 'PHP', icon: 'php', group: 'Web & business apps' },
+  { name: 'MySQL', icon: 'mysql', group: 'Web & business apps' },
   { name: 'Alpine.js', icon: 'alpinejs-icon', group: 'Web & business apps' },
   { name: 'Livewire', icon: 'livewire', group: 'Web & business apps' },
   {
