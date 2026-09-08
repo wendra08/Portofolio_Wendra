@@ -1,5 +1,19 @@
 import { setScrollMotionPaused } from './scroll-animations';
 
+const introScreen = document.querySelector<HTMLElement>('.intro-screen');
+if (introScreen) {
+  const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? 350
+    : 1900;
+  window.setTimeout(() => {
+    introScreen.classList.add('is-leaving');
+    window.setTimeout(() => {
+      introScreen.remove();
+      document.documentElement.classList.remove('intro-active');
+    }, 650);
+  }, delay);
+}
+
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
 const mobileNav = document.querySelector<HTMLElement>('#mobile-navigation');
 function closeMenu() {

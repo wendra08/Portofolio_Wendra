@@ -39,7 +39,7 @@ const socials = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="intro-active">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,6 +53,12 @@ const socials = [
     <title>{profile.name} — {profile.title}</title>
   </head>
   <body>
+    <div class="intro-screen" aria-label="Welcome to my portfolio website">
+      <div class="intro-mark" aria-hidden="true">w<span>.</span></div>
+      <p class="intro-label">WELCOME TO</p>
+      <h1>MY PORTFOLIO<br /><em>WEBSITE</em></h1>
+      <span class="intro-line" aria-hidden="true"></span>
+    </div>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container nav-wrap">
