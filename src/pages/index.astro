@@ -19,6 +19,7 @@ import {
 } from '../data/portfolio';
 
 const hasCV = existsSync(resolve('public', profile.cvFile));
+const baseUrl = import.meta.env.BASE_URL;
 const groups = [...new Set(skills.map((skill) => skill.group))];
 const navigation = [
   { label: 'About', id: 'about' },
@@ -44,7 +45,7 @@ const socials = [
     <meta property="og:description" content={profile.description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
     <title>{profile.name} — {profile.title}</title>
   </head>
   <body>
@@ -109,7 +110,7 @@ const socials = [
                 hasCV ? (
                   <a
                     class="button button-text"
-                    href={`/${profile.cvFile}`}
+                    href={`${baseUrl}${profile.cvFile}`}
                     download
                   >
                     Download CV <Icon name="download" size={18} />
@@ -295,7 +296,7 @@ const socials = [
         <article class="education-card" data-reveal>
           <div class="education-mark">
             <img
-              src="/images/education/universitas-mulawarman.svg"
+              src={`${baseUrl}images/education/universitas-mulawarman.svg`}
               alt="Universitas Mulawarman logo"
             />
             <span>UNMUL</span>
