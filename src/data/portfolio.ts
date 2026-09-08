@@ -54,6 +54,50 @@ export const education = {
     'Graduated from the Informatics program at Universitas Mulawarman with a GPA of 3.93.',
 };
 
+export type Certificate = {
+  title: string;
+  issuer: string;
+  technology: string;
+  issued: string;
+  validity: string;
+  credentialId: string;
+  description: string;
+  accent: 'tensorflow' | 'mikrotik';
+  imageAlt: string;
+  original: string;
+};
+
+export const certificates: Certificate[] = [
+  {
+    title: 'TensorFlow Developer Certificate',
+    issuer: 'TensorFlow',
+    technology: 'tensorflow',
+    issued: '29 Oct 2023',
+    validity: 'Expires 29 Oct 2026',
+    credentialId: '85569435',
+    description:
+      'Certification covering foundational and practical machine-learning skills through building and training models with TensorFlow.',
+    accent: 'tensorflow',
+    imageAlt:
+      'TensorFlow Developer Certificate issued to Muhammad Wendra Suryananda with certificate ID 85569435.',
+    original: '/images/certificates/tensorflow-developer-certificate.png',
+  },
+  {
+    title: 'MikroTik Certified Network Associate',
+    issuer: 'MikroTik',
+    technology: 'mikrotik',
+    issued: '07 Jun 2024',
+    validity: 'Valid for three years from issue',
+    credentialId: '2406NA5684',
+    description:
+      'Certification recognizing completion of the MikroTik Certified Network Associate training and requirements.',
+    accent: 'mikrotik',
+    imageAlt:
+      'MikroTik Certified Network Associate certificate issued to Muhammad Wendra Suryananda with certificate number 2406NA5684.',
+    original: '/images/certificates/mikrotik-mtcna-certificate.png',
+  },
+];
+
 export const skills = [
   { name: 'MikroTik', icon: 'mikrotik', group: 'Infrastructure' },
   { name: 'NAS', icon: 'storage', group: 'Infrastructure' },

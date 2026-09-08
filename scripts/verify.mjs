@@ -33,6 +33,10 @@ try {
     true,
   );
   assert.equal(await page.locator('.experience-row').count(), 3);
+  assert.equal(await page.locator('#certificates .certificate-card').count(), 2);
+  assert.equal(await page.locator('#certificates .certificate-image img').count(), 2);
+  assert.match(await page.locator('#certificates').innerText(), /TensorFlow Developer Certificate/);
+  assert.match(await page.locator('#certificates').innerText(), /MikroTik Certified Network Associate/);
   assert.equal(await page.locator('#education .education-card').count(), 1);
   assert.equal(
     await page

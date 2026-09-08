@@ -13,6 +13,7 @@ import {
   profile,
   experiences,
   education,
+  certificates,
   skills,
   projects,
   achievements,
@@ -29,6 +30,7 @@ const navigation = [
   { label: 'Education', id: 'education' },
   { label: 'Work', id: 'work' },
   { label: 'Achievements', id: 'achievements' },
+  { label: 'Certificates', id: 'certificates' },
 ];
 const socials = [
   { label: 'GitHub', url: profile.github },
@@ -428,10 +430,67 @@ const socials = [
         </div>
       </section>
 
+      <section id="certificates" class="section container certificates-section">
+        <div class="section-kicker">
+          <span>07 / CERTIFICATES</span><span>VERIFIED LEARNING MILESTONES</span>
+        </div>
+        <div class="section-heading">
+          <h2>Skills earned.<br /><em>Knowledge put to work.</em></h2><p>
+            Professional certifications across<br />machine learning and networking.
+          </p>
+        </div>
+        <div class="certificate-grid">
+          {
+            certificates.map((certificate) => (
+              <article
+                class:list={['certificate-card', `certificate-${certificate.accent}`]}
+                data-reveal
+              >
+                <div class="certificate-topline">
+                  <span>PROFESSIONAL CERTIFICATE</span>
+                  <span>{certificate.issuer}</span>
+                </div>
+                <a
+                  class="certificate-image"
+                  href={assetUrl(certificate.original)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${certificate.title} in a new tab`}
+                >
+                  <img
+                    src={assetUrl(certificate.original)}
+                    alt={certificate.imageAlt}
+                    loading="lazy"
+                  />
+                </a>
+                <div class="certificate-copy">
+                  <h3>{certificate.title}</h3>
+                  <p>{certificate.description}</p>
+                </div>
+                <dl class="certificate-facts">
+                  <div><dt>Issued</dt><dd>{certificate.issued}</dd></div>
+                  <div><dt>Validity</dt><dd>{certificate.validity}</dd></div>
+                  <div><dt>Credential ID</dt><dd>{certificate.credentialId}</dd></div>
+                </dl>
+                <a
+                  class="certificate-original"
+                  href={assetUrl(certificate.original)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View original certificate <Icon name="arrow" size={14} /><span
+                    class="sr-only">(opens in a new tab)</span
+                  ></a
+                >
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
       <section id="contact" class="contact-section">
         <div class="container">
           <div class="section-kicker">
-            <span>07 / GET IN TOUCH</span><span
+            <span>08 / GET IN TOUCH</span><span
               >GOOD WORK STARTS WITH A CONVERSATION</span
             >
           </div><div class="contact-layout">
