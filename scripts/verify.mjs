@@ -28,10 +28,14 @@ try {
     await portrait.evaluate((img) => img.naturalWidth > 0),
     'Profile photo must load successfully',
   );
+  const downloadCV = page.getByRole('link', { name: 'Download CV' });
+  assert.equal(await downloadCV.count(), 1);
   assert.equal(
-    await page.getByRole('button', { name: 'Download CV' }).isDisabled(),
-    true,
+    await downloadCV.getAttribute('href'),
+    '/Muhammad-Wendra-Suryananda-CV.pdf',
   );
+  assert.notEqual(await downloadCV.getAttribute('download'), null);
+  assert.equal(await page.locator('#cv-note').count(), 0);
   assert.equal(await page.locator('.experience-row').count(), 3);
   assert.equal(await page.locator('#certificates .certificate-card').count(), 2);
   assert.equal(await page.locator('#certificates .certificate-image img').count(), 2);
@@ -65,8 +69,8 @@ try {
   );
   assert.equal(await page.locator('.project-card').count(), 4);
   assert.equal(await page.locator('.project-card .coming-soon').count(), 0);
-  assert.equal(await page.locator('.skill-group li').count(), 13);
-  assert.equal(await page.locator('.skill-group li svg').count(), 13);
+  assert.equal(await page.locator('.skill-group li').count(), 14);
+  assert.equal(await page.locator('.skill-group li svg').count(), 14);
   assert.equal(await page.locator('a[href="#"]').count(), 0);
 
   const pause = page.getByRole('button', { name: 'Pause animations' });
@@ -171,7 +175,7 @@ try {
   });
   const staticPage = await noJS.newPage();
   await staticPage.goto(baseURL);
-  assert.equal(await staticPage.locator('h1').isVisible(), true);
+  assert.equal(await staticPage.locator('#home h1').isVisible(), true);
   await staticPage.locator('.portrait-photo').evaluate((img) => img.decode());
   assert.equal(await staticPage.locator('#achievements h2').isVisible(), true);
   await noJS.close();
@@ -286,7 +290,7 @@ try {
   }
   assert.deepEqual(errors, [], 'Browser errors or failed resources');
   console.log(
-    'PASS: home and case study layouts, 5 viewport sizes, navigation, project links, original screenshot access, animation controls, reduced motion, missing-CV state, 13 skill logos, WCAG A/AA scans, no-JavaScript content, and browser resources.',
+    'PASS: home and case study layouts, 5 viewport sizes, navigation, project links, original screenshot access, animation controls, reduced motion, active CV download, 14 skill logos, WCAG A/AA scans, no-JavaScript content, and browser resources.',
   );
   console.log(
     'Screenshots: test-results/desktop.png, test-results/desktop-hero.png, test-results/mobile.png',

@@ -40,13 +40,13 @@ The hero uses `public/images/wendra-professional-v2-fullhd.png` through `src/com
 
 ## Enable CV download
 
-Place the actual PDF at:
+The downloadable CV is included at:
 
 ```text
 public/Muhammad-Wendra-Suryananda-CV.pdf
 ```
 
-Then rebuild (or restart the development server). The download link activates only when the file exists. Until then, the disabled control is accompanied by “PDF coming soon”. To change the filename, update `profile.cvFile`.
+The Download CV button is active. To replace it later, update the file at this path and keep the filename synchronized with `profile.cvFile`.
 
 ## Accessibility and motion
 
