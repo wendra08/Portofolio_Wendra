@@ -1592,6 +1592,14 @@ h3 {
   line-height: 1.9;
   color: #aab3a3;
 }
+.contact-form { width:min(100%, 420px); margin-top:26px; display:grid; gap:9px; }
+.contact-form label { font:9px var(--font-mono); letter-spacing:.7px; text-transform:uppercase; color:#aab9a7; margin-top:8px; }
+.contact-form input, .contact-form textarea { width:100%; border:1px solid #3d4a3b; background:#121812; color:#e2ebe0; border-radius:3px; padding:12px 13px; font:12px var(--font-sans); outline:none; }
+.contact-form textarea { resize:vertical; min-height:100px; line-height:1.6; }
+.contact-form input:focus, .contact-form textarea:focus { border-color:var(--accent); box-shadow:0 0 0 2px #a7c89b20; }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color:#71806f; }
+.contact-form .button { justify-self:start; margin-top:8px; }
+.contact-form-note { color:#7f8d7d; font-size:10px; line-height:1.6; }
 .contact-details .contact-pending {
   display: flex;
   align-items: center;

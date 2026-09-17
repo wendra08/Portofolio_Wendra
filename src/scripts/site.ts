@@ -89,6 +89,18 @@ motionButton?.addEventListener('click', () => {
 motionPreference.addEventListener('change', updateMotion);
 updateMotion();
 
+const contactForm = document.querySelector<HTMLFormElement>('#contact-form');
+contactForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const data = new FormData(contactForm);
+  const name = String(data.get('name') ?? '').trim();
+  const email = String(data.get('email') ?? '').trim();
+  const message = String(data.get('message') ?? '').trim();
+  const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+  window.location.href = `mailto:wendrawork@gmail.com?subject=${subject}&body=${body}`;
+});
+
 const navLinks = document.querySelectorAll<HTMLAnchorElement>('.desktop-nav a');
 const observer = new IntersectionObserver(
   (entries) => {
