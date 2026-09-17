@@ -23,6 +23,19 @@ const hasCV = existsSync(resolve('public', profile.cvFile));
 const baseUrl = import.meta.env.BASE_URL;
 const assetUrl = (path: string) =>
   `${baseUrl.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+const siteUrl = 'https://wendrasuryananda.my.id';
+const socialImage = `${siteUrl}/images/wendra-professional-v2-fullhd.png`;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.title,
+  url: siteUrl,
+  image: socialImage,
+  email: `mailto:${profile.email}`,
+  sameAs: [profile.github, profile.linkedin],
+  worksFor: { '@type': 'Organization', name: 'PT Graha Prima Energy' },
+};
 const groups = [...new Set(skills.map((skill) => skill.group))];
 const navigation = [
   { label: 'About', id: 'about' },
@@ -47,10 +60,25 @@ const socials = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#101312" />
     <meta name="description" content={profile.description} />
+    <meta name="author" content={profile.name} />
+    <link rel="canonical" href={siteUrl} />
     <meta property="og:title" content={`${profile.name} — ${profile.title}`} />
     <meta property="og:description" content={profile.description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:site_name" content={`${profile.name} - Portfolio`} />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={`${profile.name} - ${profile.title}`} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${profile.name} - ${profile.title}`} />
+    <meta name="twitter:description" content={profile.description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={`${profile.name} - ${profile.title}`} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <link rel="icon" type="image/svg+xml" href={assetUrl('favicon.svg')} />
     <title>{profile.name} — {profile.title}</title>
   </head>
