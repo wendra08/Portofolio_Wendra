@@ -1,0 +1,29 @@
+---
+import '@fontsource-variable/manrope';
+import '@fontsource/ibm-plex-mono/400.css';
+import '../styles/global.css';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" /><title>Page not found — Wendra</title>
+  </head>
+  <body>
+    <main class="not-found container">
+      <a class="brand" href="/">w<span>.</span><span class="brand-label">WENDRA</span></a>
+      <p class="eyebrow"><span class="status-dot"></span> ERROR 404</p>
+      <h1>This page took<br /><em>a wrong turn.</em></h1>
+      <p>The address may be outdated, or the page may have moved.</p>
+      <a class="button button-primary" href="/">Back to portfolio <span aria-hidden="true">→</span></a>
+    </main>
+  </body>
+</html>
+<style>
+  .not-found { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:24px; }
+  .not-found .brand { position:absolute; top:28px; left:max(22px, calc((100vw - 1240px) / 2)); }
+  .not-found .eyebrow { color:var(--accent); margin-top:60px; }
+  .not-found h1 { font-size:clamp(48px,8vw,100px); line-height:1.02; letter-spacing:-4px; }
+  .not-found h1 em { color:var(--accent); }
+  .not-found > p:not(.eyebrow) { color:var(--muted); font-size:14px; }
+</style>

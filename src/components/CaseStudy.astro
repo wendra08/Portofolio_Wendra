@@ -10,7 +10,10 @@ interface Props {
 }
 const { project } = Astro.props;
 const WorkflowList = project.workflowOrdered === false ? 'ul' : 'ol';
-import { profile } from '../data/portfolio';
+import { profile, projects } from '../data/portfolio';
+const currentIndex = projects.findIndex((item) => item.title === project.title);
+const previousProject = currentIndex > 0 ? projects[currentIndex - 1] : undefined;
+const nextProject = currentIndex >= 0 && currentIndex < projects.length - 1 ? projects[currentIndex + 1] : undefined;
 const sections = ['Problem', 'Solution', 'Results', 'Tech stack'];
 ---
 
@@ -326,6 +329,10 @@ const sections = ['Problem', 'Solution', 'Results', 'Tech stack'];
             >Back to selected work <Icon name="arrow" size={18} /></a
           >
         </div>
+        <nav class="project-switcher" aria-label="Other case studies">
+          {previousProject ? <a href={previousProject.url}><span>PREVIOUS PROJECT</span><strong>← {previousProject.title}</strong></a> : <span></span>}
+          {nextProject ? <a class="next-project" href={nextProject.url}><span>NEXT PROJECT</span><strong>{nextProject.title} →</strong></a> : <span></span>}
+        </nav>
       </article>
     </main>
     <footer class="container footer">
@@ -692,6 +699,12 @@ const sections = ['Problem', 'Solution', 'Results', 'Tech stack'];
     margin-top: 12px;
     line-height: 1.8;
   }
+  .project-switcher { display:grid; grid-template-columns:1fr 1fr; gap:25px; padding:25px 0 55px; border-top:1px solid var(--line); }
+  .project-switcher a { display:flex; flex-direction:column; gap:10px; color:#b8c8b7; }
+  .project-switcher a:hover { color:var(--accent); }
+  .project-switcher a span { font:9px var(--font-mono); color:var(--accent); letter-spacing:.8px; }
+  .project-switcher strong { font-size:14px; font-weight:500; line-height:1.5; }
+  .project-switcher .next-project { text-align:right; align-items:flex-end; }
   @media (max-width: 900px) {
     .overview {
       grid-template-columns: 1fr;
@@ -810,6 +823,8 @@ const sections = ['Problem', 'Solution', 'Results', 'Tech stack'];
       flex-direction: column;
       padding-block: 32px;
     }
+    .project-switcher { grid-template-columns:1fr; padding-bottom:35px; }
+    .project-switcher .next-project { text-align:left; align-items:flex-start; }
   }
   @media print {
     .case-nav,
