@@ -576,21 +576,7 @@ const socials = [
                 Whether it's about technology, a project,<br
                   class="desktop-break"
                 /> or exchanging ideas — let's connect.
-              </p>{
-                profile.email ? (
-                  <a
-                    class="button button-primary"
-                    href={`mailto:${profile.email}`}
-                  >
-                    Say hello <Icon name="arrow" size={18} />
-                  </a>
-                ) : (
-                  <p class="contact-pending">
-                    <Icon name="mail" size={18} /> Contact details coming soon
-                  </p>
-                )
-
-              }
+              </p>
               <form class="contact-form" id="contact-form">
                 <label for="contact-name">Your name</label>
                 <input id="contact-name" name="name" type="text" autocomplete="name" required placeholder="Your name" />
