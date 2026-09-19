@@ -26,21 +26,37 @@ export const experiences = [
     role: 'Staff IT Developer',
     discipline: 'Software development',
     current: true,
-    period: '2026 — Present',
+    period: 'September 2026 — Present',
+    responsibilities: [
+      'Support Odoo ERP implementation for asset management and maintenance.',
+      'Review business requirements, process workflows, and vendor blueprints to identify gaps and clarification needs.',
+      'Coordinate with internal departments and implementation vendors to align system workflows with operational requirements.',
+      'Document review findings and track outstanding implementation questions.',
+    ],
   },
   {
     company: 'PT ITCI Kartika Utama',
     role: 'Staff IT Specialist',
     discipline: 'IT infrastructure & systems',
     current: false,
-    period: '2025 — 2026',
+    period: 'July 2025 — August 2026',
+    responsibilities: [
+      'Troubleshot hardware and software issues and provided day-to-day technical support.',
+      'Managed MikroTik network configurations, NAS storage, and databases.',
+      'Developed web-based internal systems and analytical dashboards.',
+      'Prepared IT standard operating procedures and contributed to annual IT budget planning.',
+    ],
   },
   {
     company: 'Koding Next',
     role: 'IT Advanced Teacher',
     discipline: 'Technology education',
     current: false,
-    period: '2024 — 2025',
+    period: 'July 2024 — July 2025',
+    responsibilities: [
+      'Taught programming to students aged 8–16.',
+      'Managed and updated class schedules using Notion and classroom tools.',
+    ],
   },
 ];
 
@@ -220,16 +236,16 @@ export const achievements: Achievement[] = [
   {
     title: '2nd Place — Hackathon',
     issuer: 'Team achievement',
-    year: '2024',
+    year: '2023',
     category: 'AI & innovation',
     highlight: 'CCTV accident detection',
     description:
-      'Our team earned second place in a 2024 hackathon with a startup concept for detecting accidents through CCTV footage.',
+      'Our team earned second place in a 2023 hackathon with a startup concept for detecting accidents through CCTV footage.',
     contribution:
       'I contributed by developing the AI model to detect accidents in CCTV footage.',
     image: hackathonPhoto,
     imageAlt:
-      'Hackathon team holding a second-place award sign after the 2024 competition.',
+      'Hackathon team holding a second-place award sign after the 2023 competition.',
     url: '/images/achievements/hackathon-2024-second-place.jpg',
     linkLabel: 'View team photo',
   },

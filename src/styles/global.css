@@ -890,6 +890,20 @@ h3 {
   width: 4px;
   height: 4px;
 }
+.experience-responsibilities {
+  margin: 20px 0 0;
+  padding-left: 17px;
+  max-width: 650px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+.experience-responsibilities li + li {
+  margin-top: 8px;
+}
+.experience-responsibilities li::marker {
+  color: var(--accent);
+}
 .experience-company h3 {
   font-size: 22px;
 }

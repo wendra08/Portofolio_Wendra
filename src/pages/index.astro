@@ -307,6 +307,11 @@ const socials = [
                       </div>
                       <h3>{experience.company}</h3>
                       <p>{experience.role}</p>
+                      <ul class="experience-responsibilities">
+                        {experience.responsibilities.map((responsibility) => (
+                          <li>{responsibility}</li>
+                        ))}
+                      </ul>
                     </>
                   </div>
                   <div class="experience-discipline">
