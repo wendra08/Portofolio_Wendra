@@ -870,6 +870,20 @@ h3 {
 .experience-company {
   flex: 1;
 }
+.experience-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.experience-logo {
+  display: block;
+  width: 64px;
+  height: 48px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.logo-gpe { filter: url(#logo-remove-white); }
+.logo-koding { filter: brightness(0) invert(1); }
 .experience-meta {
   display: flex;
   gap: 16px;

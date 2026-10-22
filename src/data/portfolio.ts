@@ -23,6 +23,7 @@ export const profile = {
 export const experiences = [
   {
     company: 'PT Graha Prima Energy',
+    logo: 'images/companies/graha-prima-energy.png',
     role: 'Staff IT Developer',
     discipline: 'Software development',
     current: true,
@@ -36,6 +37,7 @@ export const experiences = [
   },
   {
     company: 'PT ITCI Kartika Utama',
+    logo: 'images/companies/itci-kartika-utama.png',
     role: 'Staff IT Specialist',
     discipline: 'IT infrastructure & systems',
     current: false,
@@ -49,6 +51,7 @@ export const experiences = [
   },
   {
     company: 'Koding Next',
+    logo: 'images/companies/koding-next.avif',
     role: 'IT Advanced Teacher',
     discipline: 'Technology education',
     current: false,
