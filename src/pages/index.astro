@@ -122,7 +122,14 @@ const socials = [
     </header>
 
     <main id="main">
-      <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><filter id="logo-remove-white" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -1 -1 -1 0 3" /></filter></defs></svg>
+      <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+        <defs>
+          <filter id="logo-remove-white" color-interpolation-filters="sRGB">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -1 -1 -1 0 3" result="withoutWhite" />
+            <feComposite in="withoutWhite" in2="SourceAlpha" operator="in" />
+          </filter>
+        </defs>
+      </svg>
       <section id="home" class="hero container">
         <div class="hero-main">
           <div class="hero-copy">
